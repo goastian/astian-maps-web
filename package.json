@@ -1,0 +1,38 @@
+{
+  "name": "@astian-maps/web",
+  "version": "0.2.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "scripts": {
+    "predev": "pnpm --dir ../../packages/map-style build && node scripts/sync-map-styles.mjs && node scripts/sync-maplibre-worker.mjs && node scripts/sync-calibration.mjs",
+    "dev": "next dev",
+    "prebuild": "pnpm --dir ../../packages/map-style build && node scripts/sync-map-styles.mjs && node scripts/sync-maplibre-worker.mjs && node scripts/sync-calibration.mjs",
+    "build": "next build",
+    "prelint": "next typegen",
+    "lint": "tsc --noEmit",
+    "start": "next start",
+    "pretypecheck": "next typegen",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@astian-maps/contracts": "workspace:*",
+    "@astian-maps/design-tokens": "workspace:*",
+    "@astian-maps/i18n": "workspace:*",
+    "@astian/map-style": "workspace:*",
+    "@goastian/astian-ui": "0.1.0",
+    "@phosphor-icons/react": "^2.1.10",
+    "maplibre-gl": "^6.16.0",
+    "next": "~15.5.28",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^5.8.3",
+    "vite": "^7.3.7",
+    "vitest": "^5.0.5"
+  }
+}

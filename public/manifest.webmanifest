@@ -1,0 +1,48 @@
+{
+  "name": "Astian Maps",
+  "short_name": "Astian Maps",
+  "description": "Mapas y rutas abiertos basados en OpenStreetMap.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "es",
+  "display": "standalone",
+  "background_color": "#edf1f4",
+  "theme_color": "#2866d3",
+  "categories": [
+    "navigation",
+    "travel"
+  ],
+  "icons": [
+    {
+      "src": "/icons/astian-maps.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

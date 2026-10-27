@@ -1,0 +1,193 @@
+/* Air-quality readout card (map overlay). Layout lives in ui.css. */
+
+
+.air-quality-card.is-loading,
+.air-quality-card.is-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.air-quality-card.is-loading > svg {
+  color: var(--a-primary);
+  animation: air-quality-breathe 1.35s ease-in-out infinite alternate;
+}
+
+.air-quality-card.is-error > svg {
+  color: var(--a-danger, #b42318);
+}
+
+.air-quality-card.is-loading > div,
+.air-quality-card.is-error > div {
+  display: grid;
+  gap: 3px;
+}
+
+.air-quality-card.is-loading span,
+.air-quality-card.is-error span {
+  color: var(--a-text-secondary);
+  font-size: 12px;
+}
+
+.air-quality-card.is-loading small,
+.air-quality-card.is-error small {
+  color: var(--a-text-tertiary);
+  font-size: 10px;
+}
+
+.air-quality-card.has-reading {
+  display: grid;
+  gap: 11px;
+}
+
+.air-quality-card.has-reading > header,
+.air-quality-card.has-reading > header > div,
+.air-quality-card.has-reading > header span {
+  display: flex;
+  align-items: center;
+}
+
+.air-quality-card.has-reading > header {
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.air-quality-card.has-reading > header > div {
+  min-width: 0;
+  gap: 8px;
+}
+
+.air-quality-card.has-reading > header span {
+  min-width: 0;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.air-quality-card.has-reading > header strong {
+  font-size: 13px;
+}
+
+.air-quality-card.has-reading > header small {
+  overflow: hidden;
+  max-width: 190px;
+  color: var(--a-text-tertiary);
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.air-quality-card.has-reading > header em {
+  flex: 0 0 auto;
+  padding: 4px 7px;
+  border-radius: 999px;
+  color: var(--air-quality-tone, var(--a-text-secondary));
+  background: color-mix(in srgb, var(--air-quality-tone, var(--a-border)) 12%, transparent);
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.air-quality-card[data-tone="good"] { --air-quality-tone: #13805f; }
+.air-quality-card[data-tone="moderate"] { --air-quality-tone: #9a6700; }
+.air-quality-card[data-tone="sensitive"] { --air-quality-tone: #b54708; }
+.air-quality-card[data-tone="unhealthy"] { --air-quality-tone: #c4320a; }
+.air-quality-card[data-tone="very-unhealthy"] { --air-quality-tone: #7a5af8; }
+.air-quality-card[data-tone="hazardous"] { --air-quality-tone: #9f1239; }
+.air-quality-card[data-tone="unknown"] { --air-quality-tone: var(--a-text-tertiary); }
+
+.air-quality-values {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.air-quality-values > span {
+  display: grid;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: var(--a-radius-sm);
+  background: var(--a-bg-muted);
+}
+
+.air-quality-values small {
+  color: var(--a-text-tertiary);
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: .04em;
+}
+
+.air-quality-values strong {
+  overflow: hidden;
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.air-quality-card footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--a-text-tertiary);
+  font-size: 8px;
+}
+
+.air-quality-card footer a {
+  color: var(--a-primary);
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.air-quality-card footer a:hover {
+  text-decoration: underline;
+}
+
+@keyframes air-quality-breathe {
+  from { opacity: .45; transform: translateY(1px); }
+  to { opacity: 1; transform: translateY(-1px); }
+}
+
+.air-quality-card.is-compact {
+  display: inline-flex;
+  width: auto;
+  min-height: 0;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px 7px 10px;
+  border-radius: 18px;
+  font-size: 13px;
+}
+
+.air-quality-card.is-compact > svg {
+  color: var(--air-quality-tone, var(--a-primary));
+}
+
+.air-quality-card.is-compact strong {
+  font-weight: 600;
+}
+
+.air-quality-card.is-compact button,
+.air-quality-retry {
+  padding: 4px 12px;
+  border: 1px solid var(--a-border-strong);
+  border-radius: 14px;
+  color: var(--a-primary);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.air-quality-retry {
+  margin-top: 6px;
+}
+
+.air-quality-card.is-compact button:hover,
+.air-quality-retry:hover {
+  background: var(--a-primary-soft);
+}
+
+.overlay-list .air-quality-retry.is-inline {
+  justify-self: start;
+  margin: 0 0 6px 36px;
+}
