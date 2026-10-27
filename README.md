@@ -1,149 +1,146 @@
 <div align="center">
 
-<img src="docs/logo.svg" width="120" alt="Logo de Astian Maps">
+<img src="docs/logo.svg" width="120" alt="Astian Maps logo">
 
 # Astian Maps Web
 
-Mapa web y planificador de rutas abierto. Búsqueda, lugares cercanos, rutas con paradas, capas, reportes de la comunidad en vivo y continuidad hacia la app Android.
+An open web map and route planner. Search, nearby places, routes with stops, map layers, live community reports and a hand-off to the Android app.
 
-[Astian Maps Android](https://github.com/goastian/astian-maps-android) · [Repositorio web](https://github.com/goastian/astian-maps-web)
+[Astian Maps Android](https://github.com/goastian/astian-maps-android) · [Web repository](https://github.com/goastian/astian-maps-web)
 
 </div>
 
-Cliente Next.js 15 y React 19 con render MapLibre GL, datos de OpenStreetMap y esquema
-OpenMapTiles. No usa SDK de ejecución de Google Maps ni de Mapbox. Forma parte del monorepo
-de Astian Maps: comparte contratos, traducciones, estilos y tokens de diseño con el gateway
-FastAPI (`services/api`) y con el cliente nativo Android.
+A Next.js 15 and React 19 client rendered with MapLibre GL, on OpenStreetMap data and the
+OpenMapTiles schema. It has no Google Maps or Mapbox runtime SDK. It is part of the Astian Maps
+monorepo and shares contracts, translations, styles and design tokens with the FastAPI gateway
+(`services/api`) and the native Android client.
 
-![Mapa web de Astian Maps con los reportes de la comunidad](docs/screenshots/web-map.png)
+![Astian Maps web map with community reports](docs/screenshots/web-map.png)
 
-## Qué hace
+## What it does
 
-- **Mapa vectorial** con temas claro, oscuro y de navegación, e interfaz en español, inglés,
-  francés y alemán.
-- **Búsqueda** de direcciones y lugares, y categorías de lugares cercanos (restaurantes, cafés,
-  supermercados, tiendas, farmacias, hoteles, combustible y cargadores).
-- **Ficha de lugar** con dirección, horario, teléfono, coordenadas, reseñas y atribución de los
-  datos abiertos.
-- **Rutas** en coche, bicicleta o a pie, con paradas intermedias, alternativas, opciones para
-  evitar peajes, autopistas y ferris, e indicaciones paso a paso.
-- **Reportes de la comunidad** en vivo sobre el mapa: tráfico, policía, accidentes, peligros,
-  baches, obras, cortes, clima y cámaras.
-- **Capas**: carretera, satélite, terreno, rutas ciclistas, cargadores eléctricos, tráfico en
-  tiempo real, edificios 3D y calidad del aire. Las capas de evaluación están desactivadas en
-  producción.
-- **Compartir y continuar en Android**: una URL canónica v1 lleva el plan completo (origen,
-  destino, paradas, modo, preferencias y capas) y se abre en la app.
-- **Modo de bajo consumo**, lugares guardados, medición de distancias y pantalla completa.
-- **Responsive**: panel lateral en escritorio y barra inferior en móvil.
+- **Vector map** with light, dark and navigation themes, and an interface in English, Spanish,
+  French and German.
+- **Search** for addresses and places, plus nearby categories: restaurants, cafes, groceries,
+  shops, pharmacies, hotels, fuel and chargers.
+- **Place page** with address, opening hours, phone, coordinates, reviews and the open-data
+  attribution.
+- **Routes** by car, bike or on foot, with intermediate stops, alternatives, options to avoid
+  tolls, highways and ferries, and step-by-step directions.
+- **Community reports** live on the map: traffic, police, crashes, hazards, potholes,
+  roadworks, closures, weather and cameras.
+- **Layers**: road, satellite, terrain, cycling routes, EV chargers, live traffic, 3D buildings
+  and air quality. Evaluation layers are off in production.
+- **Share and continue on Android**: a canonical v1 URL carries the whole plan (origin,
+  destination, stops, mode, preferences and layers) and opens it in the app.
+- **Low-data mode**, saved places, distance measuring and fullscreen.
+- **Responsive**: a side panel on desktop and a bottom bar on mobile.
 
-## Reportes de la comunidad
+## Community reports
 
-La web muestra los reportes activos de la zona visible y los mantiene al día con el flujo de
-eventos de la API (`/v1/incidents/stream`). Cada reporte tiene un color propio, se atenúa
-mientras nadie lo ha confirmado y se agrupa en círculos con contador al alejar el zoom. Un
-tramo con tráfico se pinta de ámbar a rojo oscuro según el nivel, un corte lleva franjas
-rojas y blancas, y unas obras, naranjas y blancas.
+The web shows the active reports in view and keeps them current from the API's event stream
+(`/v1/incidents/stream`). Each type has its own color, a report fades while nobody has
+confirmed it, and zoomed out they gather into counted circles. A jam paints its stretch of road
+amber to dark red by level, a closure is striped red and white, and roadworks orange and white.
 
-Los reportes **solo se leen en la web**. Se crean y se confirman desde
-[Astian Maps Android](https://github.com/goastian/astian-maps-android), y aparecen en el mapa
-web en cuanto se envían. No hay cuenta ni se guarda la IP: el servidor conserva únicamente un
-hash con sal de una clave aleatoria que el cliente renueva cada día.
+Reports are **read-only on the web**. They are made and confirmed in
+[Astian Maps Android](https://github.com/goastian/astian-maps-android) and show up on the web
+map as soon as they are sent. There is no account and no IP address is stored: the server keeps
+only a salted hash of a random key that the client replaces every day.
 
-![Tarjeta de un reporte de la comunidad en la web](docs/screenshots/web-incident.png)
+![A community report card on the web map](docs/screenshots/web-incident.png)
 
-Tipos de reporte: tráfico, policía, accidente, peligro, bache, obras, vía cerrada, clima y
-cámara.
+Report types: traffic, police, crash, hazard, pothole, roadworks, closure, weather and camera.
 
-## Capturas de la web
+## Web screenshots
 
-Todas las capturas usan datos de prueba en Davis, California.
+All screenshots use test data in Davis, California.
 
-| Búsqueda por categoría | Ficha de lugar |
+| Category search | Place page |
 | :---: | :---: |
-| ![Resultados de restaurantes cercanos](docs/screenshots/web-search.png) | ![Ficha de un lugar con horario y datos de contacto](docs/screenshots/web-place.png) |
+| ![Nearby restaurant results](docs/screenshots/web-search.png) | ![A place page with hours and contact details](docs/screenshots/web-place.png) |
 
-| Ruta con indicaciones | Capas del mapa |
+| Route with directions | Map layers |
 | :---: | :---: |
-| ![Ruta en coche entre dos lugares](docs/screenshots/web-route.png) | ![Selector de capas](docs/screenshots/web-layers.png) |
+| ![A car route between two places](docs/screenshots/web-route.png) | ![The layer picker](docs/screenshots/web-layers.png) |
 
-### En el móvil
+### On mobile
 
 <table>
   <tr>
-    <td align="center"><img src="docs/screenshots/web-mobile-map.png" width="280" alt="Mapa web en pantalla móvil"></td>
-    <td align="center"><img src="docs/screenshots/web-mobile-incident.png" width="280" alt="Reporte de la comunidad en pantalla móvil"></td>
+    <td align="center"><img src="docs/screenshots/web-mobile-map.png" width="280" alt="Web map on a phone screen"></td>
+    <td align="center"><img src="docs/screenshots/web-mobile-incident.png" width="280" alt="A community report on a phone screen"></td>
   </tr>
   <tr>
-    <td align="center">Mapa con reportes y barra inferior</td>
-    <td align="center">Detalle de un reporte</td>
+    <td align="center">Map with reports and bottom bar</td>
+    <td align="center">Report details</td>
   </tr>
 </table>
 
 ## Astian Maps Android
 
-El mismo mapa, las mismas rutas y los mismos reportes, en una app nativa: Kotlin, Jetpack
-Compose y MapLibre Native, sin Google SDK ni Play Services. Añade navegación giro a giro con
-guía de carriles y voz local, regiones sin conexión (mapa, búsqueda y rutas), transporte
-público, Android Auto y el botón para **hacer y confirmar reportes** mientras conduces.
+The same map, routes and reports in a native app: Kotlin, Jetpack Compose and MapLibre Native,
+with no Google SDK and no Play Services. It adds turn-by-turn navigation with lane guidance and
+on-device voice, offline regions (map, search and routing), public transit, Android Auto and the
+button to **make and confirm reports** while you drive.
 
-Repositorio: **[goastian/astian-maps-android](https://github.com/goastian/astian-maps-android)**
-(paquete `org.astian.suite.maps`).
+Repository: **[goastian/astian-maps-android](https://github.com/goastian/astian-maps-android)**
+(package `org.astian.suite.maps`).
 
 <table>
   <tr>
-    <td align="center"><img src="docs/screenshots/android-community-map.png" width="220" alt="Mapa Android con reportes de la comunidad"></td>
-    <td align="center"><img src="docs/screenshots/android-community-report.png" width="220" alt="Tarjeta de un reporte en Android"></td>
-    <td align="center"><img src="docs/screenshots/android-report-picker.png" width="220" alt="Selector para reportar en Android"></td>
-    <td align="center"><img src="docs/screenshots/android-community-dark.png" width="220" alt="Mapa oscuro con todos los tipos de reporte"></td>
+    <td align="center"><img src="docs/screenshots/android-community-map.png" width="220" alt="Android map with community reports"></td>
+    <td align="center"><img src="docs/screenshots/android-community-report.png" width="220" alt="A report card on Android"></td>
+    <td align="center"><img src="docs/screenshots/android-report-picker.png" width="220" alt="The report picker on Android"></td>
+    <td align="center"><img src="docs/screenshots/android-community-dark.png" width="220" alt="Dark map showing every report type"></td>
   </tr>
   <tr>
-    <td align="center">Reportes en el mapa</td>
-    <td align="center">Confirmar un reporte</td>
-    <td align="center">Hacer un reporte</td>
-    <td align="center">Tema oscuro</td>
+    <td align="center">Reports on the map</td>
+    <td align="center">Confirm a report</td>
+    <td align="center">Make a report</td>
+    <td align="center">Dark theme</td>
   </tr>
 </table>
 
 <table>
   <tr>
-    <td align="center"><img src="docs/screenshots/android-map.png" width="220" alt="Mapa de la app Android"></td>
-    <td align="center"><img src="docs/screenshots/android-place.png" width="220" alt="Ficha de un lugar en Android"></td>
-    <td align="center"><img src="docs/screenshots/android-drive-directions.png" width="220" alt="Ruta en coche en Android"></td>
-    <td align="center"><img src="docs/screenshots/android-navigation-alert.png" width="220" alt="Navegación giro a giro con aviso de reporte"></td>
+    <td align="center"><img src="docs/screenshots/android-map.png" width="220" alt="The Android app map"></td>
+    <td align="center"><img src="docs/screenshots/android-place.png" width="220" alt="A place page on Android"></td>
+    <td align="center"><img src="docs/screenshots/android-drive-directions.png" width="220" alt="Drive directions on Android"></td>
+    <td align="center"><img src="docs/screenshots/android-navigation-alert.png" width="220" alt="Turn-by-turn navigation with a report ahead"></td>
   </tr>
   <tr>
-    <td align="center">Mapa</td>
-    <td align="center">Lugar</td>
-    <td align="center">Ruta</td>
-    <td align="center">Navegación con aviso</td>
+    <td align="center">Map</td>
+    <td align="center">Place</td>
+    <td align="center">Directions</td>
+    <td align="center">Navigation with an alert</td>
   </tr>
 </table>
 
 <table>
   <tr>
-    <td align="center"><img src="docs/screenshots/android-layers.png" width="220" alt="Panel de capas en Android"></td>
-    <td align="center"><img src="docs/screenshots/android-transit.png" width="220" alt="Ruta en transporte público en Android"></td>
-    <td align="center"><img src="docs/screenshots/android-map-light.png" width="220" alt="Mapa claro en Android"></td>
+    <td align="center"><img src="docs/screenshots/android-layers.png" width="220" alt="The layers panel on Android"></td>
+    <td align="center"><img src="docs/screenshots/android-transit.png" width="220" alt="A transit route on Android"></td>
+    <td align="center"><img src="docs/screenshots/android-map-light.png" width="220" alt="The light map on Android"></td>
   </tr>
   <tr>
-    <td align="center">Tipos de mapa y capas</td>
-    <td align="center">Transporte público</td>
-    <td align="center">Tema claro</td>
+    <td align="center">Map types and layers</td>
+    <td align="center">Public transit</td>
+    <td align="center">Light theme</td>
   </tr>
 </table>
 
-### De la web a Android
+### From the web to Android
 
-El botón **Continuar en Android** del planificador abre el mismo plan en la app. La URL v1
-usa los mismos nombres de parámetros en la web y en Android, y la asociación de enlaces HTTPS
-se sirve en `/.well-known/assetlinks.json`.
+The planner's **Continue on Android** button opens the same plan in the app. The v1 URL uses
+the same parameter names on the web and on Android, and the HTTPS link association is served at
+`/.well-known/assetlinks.json`.
 
-## Desarrollo
+## Development
 
-Requisitos: Node.js 22+ y pnpm 10+. Este paquete depende de paquetes del monorepo
-(`@astian-maps/contracts`, `i18n`, `design-tokens` y `@astian/map-style`), así que se
-ejecuta desde el monorepo.
+Requirements: Node.js 22+ and pnpm 10+. This package depends on monorepo packages
+(`@astian-maps/contracts`, `i18n`, `design-tokens` and `@astian/map-style`), so it runs from
+inside the monorepo.
 
 ```bash
 cp .env.example .env.local
@@ -151,33 +148,33 @@ pnpm install --frozen-lockfile
 pnpm --filter @astian-maps/web dev      # http://localhost:3000
 ```
 
-| Comando | Qué hace |
+| Command | What it does |
 | --- | --- |
-| `pnpm dev` | Servidor de desarrollo. Compila y sincroniza estilos, worker de MapLibre y calibración antes de arrancar. |
-| `pnpm build` | Compilación de producción. |
-| `pnpm start` | Sirve la compilación de producción. |
-| `pnpm typecheck` | Comprobación de tipos con `tsc --noEmit`. |
-| `pnpm test` | Pruebas con Vitest. |
+| `pnpm dev` | Dev server. Builds and syncs the styles, the MapLibre worker and the calibration first. |
+| `pnpm build` | Production build. |
+| `pnpm start` | Serves the production build. |
+| `pnpm typecheck` | Type check with `tsc --noEmit`. |
+| `pnpm test` | Tests with Vitest. |
 
-### Configuración
+### Configuration
 
-Las variables están documentadas en [`.env.example`](.env.example). Las principales:
+Every variable is documented in [`.env.example`](.env.example). The main ones:
 
-| Variable | Uso |
+| Variable | Use |
 | --- | --- |
-| `NEXT_PUBLIC_API_URL` | API de Astian Maps (`http://localhost:8000/v1` en local). Sirve búsqueda, rutas y reportes. |
-| `NEXT_PUBLIC_MAPS_WEB_URL` | Origen público para enlaces HTTPS y rutas compartidas. |
-| `ASTIAN_TILE_SERVER_URL` | Origen de Martin que usa el proxy `/tiles`. |
-| `ASTIAN_ANDROID_SHA256_CERT_FINGERPRINTS` | Huellas del certificado de release para los App Links. Vacío en local. |
-| `NEXT_PUBLIC_MAP_START` | Cámara inicial como `latitud,longitud,zoom`. |
+| `NEXT_PUBLIC_API_URL` | The Astian Maps API (`http://localhost:8000/v1` locally). Serves search, routing and reports. |
+| `NEXT_PUBLIC_MAPS_WEB_URL` | Public origin for HTTPS links and shared routes. |
+| `ASTIAN_TILE_SERVER_URL` | Martin origin used by the `/tiles` proxy. |
+| `ASTIAN_ANDROID_SHA256_CERT_FINGERPRINTS` | Release certificate fingerprints for App Links. Empty locally. |
+| `NEXT_PUBLIC_MAP_START` | Initial camera as `latitude,longitude,zoom`. |
 
-`.env.local` queda fuera del repositorio. Las capas de evaluación (satélite, terreno y rutas
-ciclistas) y los tiles comunitarios son solo para desarrollo y un proceso con
-`NODE_ENV=production` los rechaza.
+`.env.local` stays out of the repository. The evaluation layers (satellite, terrain and cycling
+routes) and the community tiles are for development only, and a process with
+`NODE_ENV=production` rejects them.
 
-### Probar los reportes de la comunidad en local
+### Try community reports locally
 
-Con la API local en marcha (`services/api`), se puede crear un reporte de prueba:
+With the local API running (`services/api`), create a test report:
 
 ```bash
 curl -X POST http://localhost:8000/v1/incidents \
@@ -185,23 +182,23 @@ curl -X POST http://localhost:8000/v1/incidents \
   -d '{"type":"police","subtype":"hidden","coordinates":{"latitude":38.543,"longitude":-121.739},"reporterKey":"local-dev-reporter-key","source":"android"}'
 ```
 
-Aparece en el mapa web en unos segundos. Para probarlo desde un teléfono por USB, el script
-`scripts/dev-phone.sh` del monorepo redirige los puertos 8000 y 3000 con `adb reverse`.
+It appears on the web map within seconds. To try it from a phone over USB, the monorepo's
+`scripts/dev-phone.sh` forwards ports 8000 and 3000 with `adb reverse`.
 
-## Estructura
+## Layout
 
 ```text
-app/          Rutas de Next.js: mapa, planificador, proxy de tiles y App Links
-components/   MapExplorer, MapCanvas, PlaceDetail y CommunityIncidents
-lib/          API, rutas compartibles, capas, estilos, incidentes y pruebas
-public/       Estilos, sprites, glifos, iconos y los SVG de cada tipo de reporte
-scripts/      Sincronización de estilos, worker de MapLibre y calibración
-docs/         Logo y capturas de este README
+app/          Next.js routes: map, planner, tile proxy and App Links
+components/   MapExplorer, MapCanvas, PlaceDetail and CommunityIncidents
+lib/          API client, shareable routes, layers, styles, incidents and tests
+public/       Styles, sprites, glyphs, icons and the SVG for each report type
+scripts/      Style sync, MapLibre worker and calibration
+docs/         Logo and the screenshots in this README
 ```
 
-## Atribución y licencia
+## Attribution and license
 
-Datos de [OpenStreetMap](https://www.openstreetmap.org/copyright) (ODbL) y teselas
-[OpenMapTiles](https://openmaptiles.org/). Licencia Apache-2.0. La app Android es una
-derivada de Vela y se distribuye bajo GPL-3.0; consulta su
+Data from [OpenStreetMap](https://www.openstreetmap.org/copyright) (ODbL) and
+[OpenMapTiles](https://openmaptiles.org/) tiles. Licensed under Apache-2.0. The Android app is a
+derivative of Vela and is distributed under GPL-3.0; see its
 [`NOTICE.md`](https://github.com/goastian/astian-maps-android/blob/main/NOTICE.md).
